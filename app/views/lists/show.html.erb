@@ -1,4 +1,32 @@
 <div class="container">
   <h2><%= @list.name %></h2>
-  <%= link_to 'voltar', root_path %>
+   <%= link_to 'Delete a lista', list_path(@list), method: :delete %>
+  <hr>
+  <h3>Movies</h3>
+
+  <% @list.bookmarks.each do |bookmark| %>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <%= image_tag bookmark.movie.poster_url, width: 300 %>
+        </div>
+        <div class="col-6">
+          <p><%= bookmark.movie.title %></p>
+          <p><%= bookmark.movie.overview %></p>
+          
+          <p><%= bookmark.comment %></p>
+        </div>
+      </div>
+      <%= link_to 'Delete a Bookmark', bookmark_path(bookmark), method: :delete %>
+    </div>
+  <% end %>
+  <hr>
+
+  <%= simple_form_for [@list, @bookmark] do |f| %>
+    <%= f.association :movie, collection: @movies, prompt: "Choose a Movie", label: false %>
+    <%= f.input :comment, placeholder: "Take a Comment", label: false %>
+    <%= f.submit %>
+  <% end %>
+  <hr>
+  <%= link_to 'Voltar', root_path %>
 </div>

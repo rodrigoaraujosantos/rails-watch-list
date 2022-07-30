@@ -1,7 +1,5 @@
 class BookmarksController < ApplicationController
-  def new
-    @bookmark = Bookmark.new
-  end
+ 
 
   def create
     @bookmark = Bookmark.new(bookmark_params)
@@ -10,7 +8,8 @@ class BookmarksController < ApplicationController
     if @bookmark.save
       redirect_to @list
     else
-      render :new
+      @movies = Movie.all.order(:title)
+      render 'lists/show'
     end
   end
 

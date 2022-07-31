@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container pt-5">
   <h2><%= @list.name %></h2>
    <%= link_to 'Delete a lista', list_path(@list), method: :delete %>
   <hr>
@@ -17,10 +17,12 @@
           <p><%= bookmark.comment %></p>
         </div>
       </div>
+      
       <%= link_to 'Delete a Bookmark', bookmark_path(bookmark), method: :delete %>
+      <hr>
     </div>
   <% end %>
-  <hr>
+  
 
   <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.association :movie, collection: @movies, prompt: "Choose a Movie", label: false %>
